@@ -21,19 +21,16 @@ void addtion(string number_1, string number_2, string character="+"){
     string result = "";
 
     int difference = number_2.length() - number_1.length();
-
     int tmp = 0;
 
     for (int i=number_1.length()-1; i>=0; i--)
     {
-
         int sum = ((number_1[i]-'0') +
                    (number_2[i+difference]-'0') +
                    tmp);
         result.push_back(sum%10 + '0');
         tmp = sum/10;
     }
-
 
     for (int i=number_2.length()-number_1.length()-1; i>=0; i--)
     {
@@ -42,30 +39,21 @@ void addtion(string number_1, string number_2, string character="+"){
         tmp = sum/10;
     }
 
-
     if (tmp){
         result.push_back(tmp+'0');
     }
-    else{
-
-    }
-
-
 
     if(character == "-" && result != "0"){
         result.push_back('-');
 
     }
-    else{
 
-    }
     reverse(result.begin(), result.end());
 
     cout << result << endl;
 }
 
-bool is_smaller(string number_1, string number_2)
-{
+bool is_smaller(string number_1, string number_2){
 
     int length_1 = number_1.length();
     int length_2 = number_2.length();
@@ -84,11 +72,10 @@ bool is_smaller(string number_1, string number_2)
     return false;
 }
 
-
-void substraction(string number_1, string number_2)
-{
+void substraction(string number_1, string number_2){
 
     string character;
+
     if (is_smaller(number_1, number_2)){
         swap(number_1, number_2);
         character = "-";
@@ -108,6 +95,7 @@ void substraction(string number_1, string number_2)
     for (int i = length_2 - 1; i >= 0; i--) {
 
         int difference = ((number_1[i + difference_dlugosci] - '0') - (number_2[i] - '0') - tmp);
+
         if (difference < 0) {
             difference = difference + 10;
             tmp = 1;
@@ -129,8 +117,6 @@ void substraction(string number_1, string number_2)
         tmp = 0;
     }
 
-
-
     for(int i = result.length(); i > 0 ; i--){
         if (result[i-1] == '0'){
             result.pop_back();
@@ -140,15 +126,10 @@ void substraction(string number_1, string number_2)
         }
     }
 
-
     if(character == "-"){
         result.push_back('-');
 
     }
-    else{
-
-    }
-
 
     if(result.length()==0){
         result = '0';
@@ -169,9 +150,8 @@ void multiplication(string number_1, string number_2, string character)
     int length_1_pos = 0;
     int length_2_pos = 0;
 
+    for (int i=length_1-1; i>=0; i--){
 
-    for (int i=length_1-1; i>=0; i--)
-    {
         int tmp = 0;
         int length_1 = number_1[i] - '0';
 
@@ -181,13 +161,10 @@ void multiplication(string number_1, string number_2, string character)
         {
 
             int length_2 = number_2[j] - '0';
-
             int sum = length_1*length_2 + result[length_1_pos + length_2_pos] + tmp;
             tmp = sum/10;
 
-
             result[length_1_pos + length_2_pos] = sum % 10;
-
             length_2_pos++;
         }
 
@@ -203,32 +180,29 @@ void multiplication(string number_1, string number_2, string character)
         i--;
 
     if (i == -1){
-        string wyjscie = "0";
-        cout <<  wyjscie << endl;
+        string output = "0";
+        cout <<  output << endl;
     }
 
     else{
-        string wyjscie = "";
+        string output = "";
 
 
     if(character == "-"){
-        wyjscie = "-";
+        output = "-";
     }
 
     else{
-        wyjscie = "";
+        output = "";
     }
 
     while (i >= 0)
-        wyjscie += std::to_string(result[i--]);
+        output += std::to_string(result[i--]);
 
-    cout <<  wyjscie << endl;
+    cout <<  output << endl;
 
     }
-
-
 }
-
 
 string remove_zeros(string number){
 	long int i;
@@ -246,9 +220,7 @@ string remove_zeros(string number){
 	return number;
 }
 
-
- int number_size(string number_1,string number_2)
-{
+ int number_size(string number_1,string number_2){
 	if(number_1.length()>number_2.length()){
         return 1;
 	}
@@ -264,8 +236,8 @@ string remove_zeros(string number){
 	}
 	return 0;
 }
- string substract_division(string number_1,string number_2)
-{
+ string substract_division(string number_1,string number_2){
+
 	number_1=remove_zeros(number_1);
 	number_2=remove_zeros(number_2);
 
@@ -333,65 +305,54 @@ string remove_zeros(string number){
 	}
 
 	return tmp1;
-
 }
 
-
-void division(string number_1,string number_2, string character)
-{
+void division(string number_1,string number_2, string character){
 
 	long int i,j;
 	string tmp1,tmp2,tmp3,result;
 	if(number_size(number_1,number_2)==0){
         cout << "1" << endl;
     }
-	else if(number_size(number_1,number_2)==-1)
-	{
+	else if(number_size(number_1,number_2)==-1){
 		cout << "0" << endl;
 	}
 
 	else{
-	tmp1=remove_zeros(number_1);
-	tmp2=remove_zeros(number_2);
-	tmp3="";
-	result="";
+        tmp1=remove_zeros(number_1);
+        tmp2=remove_zeros(number_2);
+        tmp3="";
+        result="";
 
+        for(i=0;i<tmp1.length();i++){
+            j=0;
+            tmp3=tmp3+tmp1.at(i);
+            tmp3=remove_zeros(tmp3);
 
-	for(i=0;i<tmp1.length();i++)
-	{
-		j=0;
-		tmp3=tmp3+tmp1.at(i);
-		tmp3=remove_zeros(tmp3);
-		while(number_size(tmp3,number_2)>=0)
-		{
-			 tmp3=substract_division(tmp3,number_2);
-			tmp3=remove_zeros(tmp3);
-			j++;
-		}
-		result=result+"0";
-		result.at(i)=j;
-	}
-	for(i=0;i<result.length();i++)
-	{
-		if(result.at(i)>=10) result.at(i)+=87;
-		if(result.at(i)<10) result.at(i)+=48;
-	}
-	result=remove_zeros(result);
+            while(number_size(tmp3,number_2)>=0){
+                 tmp3=substract_division(tmp3,number_2);
+                tmp3=remove_zeros(tmp3);
+                j++;
+            }
+            result=result+"0";
+            result.at(i)=j;
+        }
+        for(i=0;i<result.length();i++){
+            if(result.at(i)>=10) result.at(i)+=87;
+            if(result.at(i)<10) result.at(i)+=48;
+        }
+        result=remove_zeros(result);
 
-    if(result=="0"){
+        if(character == "-"){
+            reverse(result.begin(), result.end());
+            result.push_back('-');
+            reverse(result.begin(), result.end());
 
-    }
-    else if(character == "-"){
-        reverse(result.begin(), result.end());
-        result.push_back('-');
-        reverse(result.begin(), result.end());
+        }
 
-    }
-    else{
-
-    }
 	cout << result << endl;
-	}
+
+    }
 }
 
 struct ret {
@@ -410,7 +371,6 @@ Struct is_operation(string line){
 
         return ret;
     }
-
 
     else if(line.find("*") != string::npos){
         ret.position = line.find('*');
@@ -434,16 +394,13 @@ Struct is_operation(string line){
         return ret;
     }
 
-
     else{
         ret.position = 0;
         ret.oper = NULL;
         return ret;
     }
 
-
 }
-
 
 int main()
 {
@@ -455,7 +412,6 @@ int main()
     int counter=0, Z=0;
 
     while (getline(cin, line)){
-
         result = is_operation(line);
 
         if(result.position == 0){
@@ -471,17 +427,15 @@ int main()
                 character[0] = '-';
 
                 for(int i=1; i < result.position; i++){
-
                     number[0] += line[i];
-            }
+                }
             }
             else{
                 character[0] = '+';
 
                 for(int i=0; i < result.position; i++){
-
                     number[0] += line[i];
-            }
+                }
 
             }
 
@@ -499,27 +453,22 @@ int main()
                 }
             }
 
-
             if (result.oper == '+'){
 
                 if((character[0] == "+") && (character[1] == "+")){
-
-                    addtion(number[0], number[1]); // dodatni result
+                    addtion(number[0], number[1]);
                 }
 
                 else if(character[0] == "-" && character[1] == "-"){
-
-                    addtion(number[0], number[1], "-"); // tutaj zmienic na dobre
+                    addtion(number[0], number[1], "-");
                 }
 
                 else if(character[0] == "-" && character[1] == "+"){
-
-                    substraction(number[1], number[0]); // result na minus lub plus
+                    substraction(number[1], number[0]);
                 }
 
                 else if(character[0] == "+" && character[1] == "-"){
-
-                    substraction(number[0], number[1]); // result na minus lub plus
+                    substraction(number[0], number[1]);
                 }
 
 
@@ -528,46 +477,38 @@ int main()
             else if (result.oper == '-'){
 
                 if((character[0] == "+") && (character[1] == "+")){
-
-                    substraction(number[0], number[1]); // dodatni lub ujemny result
+                    substraction(number[0], number[1]);
                 }
 
                 else if(character[0] == "-" && character[1] == "-"){
-
-                    substraction(number[1], number[0]); // dodatni lub ujemny result
+                    substraction(number[1], number[0]);
                 }
 
                 else if(character[0] == "-" && character[1] == "+"){
-
-                    addtion(number[0], number[1], "-"); // tutaj zmienic na dobre
+                    addtion(number[0], number[1], "-");
                 }
 
                 else if(character[0] == "+" && character[1] == "-"){
-
-                    addtion(number[0], number[1]); // dodatni lub ujemny result
+                    addtion(number[0], number[1]);
                 }
             }
 
             else if (result.oper == '*'){
 
                 if((character[0] == "+") && (character[1] == "+")){
-
-                    multiplication(number[0], number[1], "+"); // dodatni lub ujemny result
+                    multiplication(number[0], number[1], "+");
                 }
 
                 else if(character[0] == "-" && character[1] == "-"){
-
-                    multiplication(number[0], number[1], "+"); // dodatni lub ujemny result
+                    multiplication(number[0], number[1], "+");
                 }
 
                 else if(character[0] == "-" && character[1] == "+"){
-
-                    multiplication(number[0], number[1], "-"); // tutaj zmienic na dobre
+                    multiplication(number[0], number[1], "-");
                 }
 
                 else if(character[0] == "+" && character[1] == "-"){
-
-                    multiplication(number[0], number[1], "-"); // dodatni lub ujemny result
+                    multiplication(number[0], number[1], "-");
                 }
 
             }
@@ -575,24 +516,23 @@ int main()
                 if(number[1] != "0"){
 
                     if((character[0] == "+") && (character[1] == "+")){
-
-                        division(number[0], number[1], "+"); // dodatni lub ujemny result
+                        division(number[0], number[1], "+");
                     }
 
                     else if(character[0] == "-" && character[1] == "-"){
-
-                        division(number[0], number[1], "+"); // dodatni lub ujemny result
+                        division(number[0], number[1], "+");
                     }
 
                     else if(character[0] == "-" && character[1] == "+"){
-
-                        division(number[0], number[1], "-"); // tutaj zmienic na dobre
+                        division(number[0], number[1], "-");
                     }
 
                     else if(character[0] == "+" && character[1] == "-"){
-
-                        division(number[0], number[1], "-"); // dodatni lub ujemny result
+                        division(number[0], number[1], "-");
                     }
+                else{
+                    continue;
+                }
                 }
             }
 
@@ -600,9 +540,6 @@ int main()
 
             if (counter == Z){
                 break;
-            }
-            else{
-
             }
 
         }
